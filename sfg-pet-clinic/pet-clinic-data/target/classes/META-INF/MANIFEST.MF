@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: gerardo.denzinger
+Build-Jdk: 11.0.9.1
+Implementation-Title: pet-clinic-data
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: guru.springframework
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/sfg-pet-clinic/pet-clinic-data
+Created-By: Maven Integration for Eclipse
+
