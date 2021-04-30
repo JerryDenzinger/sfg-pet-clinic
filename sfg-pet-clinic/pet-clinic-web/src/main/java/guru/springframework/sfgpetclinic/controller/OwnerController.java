@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import guru.springframework.sfgpetclinic.services.OwnerService;
 
+@RequestMapping("/owners")
 @Controller
 public class OwnerController {
 
@@ -15,9 +16,14 @@ public class OwnerController {
 		this.ownerService = ownerService;
 	}
 
-	@RequestMapping({ "/owners", "owners/index", "owners/index.html" })
+	@RequestMapping({ "/index", "index.html" })
 	public String listOfOwners(Model model) {
 		model.addAttribute("owners", ownerService.findAll());
 		return "/owners/ownersindex";
+	}
+
+	@RequestMapping({ "/find" })
+	public String findOwners() {
+		return "notimplemented";
 	}
 }
