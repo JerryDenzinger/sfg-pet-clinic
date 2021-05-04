@@ -12,10 +12,12 @@ import guru.springframework.sfgpetclinic.model.Pet;
 import guru.springframework.sfgpetclinic.model.PetType;
 import guru.springframework.sfgpetclinic.model.Speciality;
 import guru.springframework.sfgpetclinic.model.Vet;
+import guru.springframework.sfgpetclinic.model.Visit;
 import guru.springframework.sfgpetclinic.services.OwnerService;
 import guru.springframework.sfgpetclinic.services.PetTypeService;
 import guru.springframework.sfgpetclinic.services.SpecialityService;
 import guru.springframework.sfgpetclinic.services.VetService;
+import guru.springframework.sfgpetclinic.services.VisitService;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -24,13 +26,15 @@ public class DataLoader implements CommandLineRunner {
 	private final VetService vetService;
 	private final PetTypeService petTypeService;
 	private final SpecialityService specialtiesService;
+	private final VisitService visitService;
 
 	public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
-			SpecialityService specialtiesService) {
+			SpecialityService specialtiesService,VisitService visitService) {
 		this.ownerService = ownerService;
 		this.vetService = vetService;
 		this.petTypeService = petTypeService;
 		this.specialtiesService = specialtiesService;
+		this.visitService = visitService;
 	}
 
 	@Override
@@ -80,6 +84,14 @@ public class DataLoader implements CommandLineRunner {
 		owner1.getPets().add(mikesPet);
 
 		ownerService.save(owner1);
+		
+		Visit dogVisit = new Visit();
+		dogVisit.setPet(mikesPet);
+		dogVisit.setDescription("Good boy need a bad!!!");
+		dogVisit.setDate(LocalDate.now());
+		visitService.save(dogVisit);
+		
+		System.out.println("Dog visit Added........");
 
 		Owner owner2 = new Owner();
 		owner2.setFirstName("Fiona");
@@ -97,6 +109,15 @@ public class DataLoader implements CommandLineRunner {
 		ownerService.save(owner2);
 
 		System.out.println("Loaded Owners........");
+		
+		Visit catVisit = new Visit();
+		catVisit.setPet(fionaPet);
+		catVisit.setDescription("Rutine Checkup");
+		catVisit.setDate(LocalDate.now());
+		visitService.save(catVisit);
+		
+		System.out.println("Cat visit Added........");
+		
 
 		Vet vet1 = new Vet();
 		vet1.setFirstName("Axel");
