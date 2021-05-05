@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 
 import guru.springframework.sfgpetclinic.model.Owner;
 import guru.springframework.sfgpetclinic.model.Pet;
