@@ -1,14 +1,13 @@
 package guru.springframework.sfgpetclinic.services.springdatajpa;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Service;
-
 import guru.springframework.sfgpetclinic.model.Visit;
 import guru.springframework.sfgpetclinic.repositories.VisitRepository;
 import guru.springframework.sfgpetclinic.services.VisitService;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 @Profile("springdatajpa")
@@ -28,8 +27,8 @@ public class VisitSDJpaService implements VisitService {
 	}
 
 	@Override
-	public Visit findById(Long id) {
-		return visitRepository.findById(id).orElse(null);
+	public Visit findById(Long aLong) {
+		return visitRepository.findById(aLong).orElse(null);
 	}
 
 	@Override
@@ -43,8 +42,7 @@ public class VisitSDJpaService implements VisitService {
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		visitRepository.deleteById(id);
+	public void deleteById(Long aLong) {
+		visitRepository.deleteById(aLong);
 	}
-
 }

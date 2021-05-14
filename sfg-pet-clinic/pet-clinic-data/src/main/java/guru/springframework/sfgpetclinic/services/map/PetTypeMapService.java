@@ -1,15 +1,14 @@
 package guru.springframework.sfgpetclinic.services.map;
 
-import java.util.Set;
-
+import guru.springframework.sfgpetclinic.model.PetType;
+import guru.springframework.sfgpetclinic.services.PetTypeService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import guru.springframework.sfgpetclinic.model.PetType;
-import guru.springframework.sfgpetclinic.services.PetTypeService;
+import java.util.Set;
 
 @Service
-@Profile({"default","map"})
+@Profile({ "default", "map" })
 public class PetTypeMapService extends AbstractMapService<PetType, Long> implements PetTypeService {
 
 	@Override
@@ -36,5 +35,4 @@ public class PetTypeMapService extends AbstractMapService<PetType, Long> impleme
 	public void deleteById(Long id) {
 		super.deleteById(id);
 	}
-
 }

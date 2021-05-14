@@ -1,15 +1,14 @@
 package guru.springframework.sfgpetclinic.services.map;
 
-import java.util.Set;
-
+import guru.springframework.sfgpetclinic.model.Visit;
+import guru.springframework.sfgpetclinic.services.VisitService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import guru.springframework.sfgpetclinic.model.Visit;
-import guru.springframework.sfgpetclinic.services.VisitService;
+import java.util.Set;
 
 @Service
-@Profile({"default","map"})
+@Profile({ "default", "map" })
 public class VisitMapService extends AbstractMapService<Visit, Long> implements VisitService {
 
 	@Override
@@ -23,12 +22,14 @@ public class VisitMapService extends AbstractMapService<Visit, Long> implements 
 	}
 
 	@Override
-	public Visit save(Visit object) {
-		if (object.getPet() == null || object.getPet().getOwner() == null || object.getPet().getId() == null
-				|| object.getPet().getOwner().getId() == null) {
+	public Visit save(Visit visit) {
+
+		if (visit.getPet() == null || visit.getPet().getOwner() == null || visit.getPet().getId() == null
+				|| visit.getPet().getOwner().getId() == null) {
 			throw new RuntimeException("Invalid Visit");
 		}
-		return super.save(object);
+
+		return super.save(visit);
 	}
 
 	@Override
@@ -40,5 +41,4 @@ public class VisitMapService extends AbstractMapService<Visit, Long> implements 
 	public void deleteById(Long id) {
 		super.deleteById(id);
 	}
-
 }

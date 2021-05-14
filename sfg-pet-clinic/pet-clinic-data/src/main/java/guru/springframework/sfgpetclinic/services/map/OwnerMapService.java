@@ -1,18 +1,18 @@
 package guru.springframework.sfgpetclinic.services.map;
 
-import java.util.Set;
-
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Service;
-
 import guru.springframework.sfgpetclinic.model.Owner;
 import guru.springframework.sfgpetclinic.model.Pet;
 import guru.springframework.sfgpetclinic.services.OwnerService;
 import guru.springframework.sfgpetclinic.services.PetService;
 import guru.springframework.sfgpetclinic.services.PetTypeService;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Set;
 
 @Service
-@Profile({"default","map"})
+@Profile({ "default", "map" })
 public class OwnerMapService extends AbstractMapService<Owner, Long> implements OwnerService {
 
 	private final PetTypeService petTypeService;
@@ -44,19 +44,21 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 							pet.setPetType(petTypeService.save(pet.getPetType()));
 						}
 					} else {
-						throw new RuntimeException("Pet Type is Required!!!!!");
+						throw new RuntimeException("Pet Type is required");
 					}
+
 					if (pet.getId() == null) {
 						Pet savedPet = petService.save(pet);
 						pet.setId(savedPet.getId());
 					}
 				});
 			}
+
 			return super.save(object);
+
 		} else {
 			return null;
 		}
-
 	}
 
 	@Override
@@ -71,7 +73,14 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 
 	@Override
 	public Owner findByLastName(String lastName) {
-		return this.findAll().stream().filter(owner -> owner.getLastName().equals(lastName)).findFirst().orElse(null);
+		return this.findAll().stream().filter(owner -> owner.getLastName().equalsIgnoreCase(lastName)).findFirst()
+				.orElse(null);
 	}
 
+	@Override
+	public List<Owner> findAllByLastNameLike(String lastName) {
+
+		// todo - impl
+		return null;
+	}
 }
